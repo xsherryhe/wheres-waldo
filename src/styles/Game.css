@@ -1,0 +1,11 @@
+.game {
+  margin: auto;
+  height: 70vh;
+  width: 90vw;
+  background-size: cover;
+  display: grid;
+}
+
+.game > * {
+  position: relative;
+}

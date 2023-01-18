@@ -1,7 +1,4 @@
 Header
-Main
-  Image (grid)
-    ImageSquare (button)
-    Selection
-      SelectionBox
-      SelectionForm (form with drop down menu)
+Game (grid with background image inline style)
+  Square (button)
+  SelectForm (form with drop down menu)

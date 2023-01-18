@@ -1,0 +1,17 @@
+form.select {
+  margin-top: 0.5rem;
+  background-color: white;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  position: absolute;
+  width: 20rem;
+  left: calc(-1 * (20rem - 100%) / 2);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+form.select select {
+  text-align: center;
+}
