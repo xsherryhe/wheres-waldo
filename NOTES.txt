@@ -1,0 +1,7 @@
+Header
+Main
+  Image (grid)
+    ImageSquare (button)
+    Selection
+      SelectionBox
+      SelectionForm (form with drop down menu)
