@@ -3,8 +3,54 @@
   height: 100%;
   background-color: transparent;
   border: none;
+  position: relative;
 }
 
 .square.active {
-  border: 2px solid blue;
+  border: 2px solid white;
+  outline: 2px solid green;
+}
+
+.square .feedback {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+}
+
+.square .correct {
+  color: green;
+  top: -125%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.square .feedback-message {
+  background-color: white;
+  padding: 0.2rem;
+}
+
+.square .correct .feedback-message {
+  border: 2px solid green;
+  font-weight: 600;
+}
+
+.square .feedback-icon {
+  font-size: 2.5rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+.square .correct .feedback-icon path {
+  stroke: white;
+  stroke-width: 30px;
+}
+
+.square .incorrect {
+  top: 0;
+  background-color: white;
+  border: 2px solid red;
+  border-radius: 50%;
+  color: red;
 }

@@ -4,9 +4,9 @@ form.select {
   border-radius: 0.2rem;
   padding: 0.5rem;
   position: absolute;
-  width: 18rem;
-  left: calc(-1 * (20rem - 100%) / 2);
-  z-index: 1;
+  width: 15rem;
+  left: calc(-1 * (15rem - 100%) / 2);
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;

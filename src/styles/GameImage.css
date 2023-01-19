@@ -1,0 +1,11 @@
+.game-image {
+  height: 525px;
+  width: 750px;
+  background-size: cover;
+  display: grid;
+  flex: none;
+}
+
+.game-image>* {
+  position: relative;
+}
