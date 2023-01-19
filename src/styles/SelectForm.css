@@ -4,7 +4,7 @@ form.select {
   border-radius: 0.2rem;
   padding: 0.5rem;
   position: absolute;
-  width: 20rem;
+  width: 18rem;
   left: calc(-1 * (20rem - 100%) / 2);
   z-index: 1;
   display: flex;
