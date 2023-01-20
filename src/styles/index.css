@@ -15,6 +15,14 @@ select, button {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: default;
+}
+
+button:not(.icon):not(.square) {
+  padding: 1rem 1.5rem;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

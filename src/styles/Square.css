@@ -2,8 +2,9 @@
   width: 100%;
   height: 100%;
   background-color: transparent;
-  border: none;
   position: relative;
+  border: 2px solid transparent;
+  outline: 2px solid transparent;
 }
 
 .square.active {
@@ -13,13 +14,13 @@
 
 .square .feedback {
   position: absolute;
-  left: 0;
+  left: -0.5rem;
   z-index: 1;
 }
 
 .square .correct {
   color: green;
-  top: -125%;
+  top: -150%;
   display: flex;
   flex-direction: column;
   align-items: center;

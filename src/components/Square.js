@@ -1,13 +1,22 @@
+import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Square.css';
 
+import DisabledContext from './contexts/DisabledContext';
+
 export default function Square({ active, setActive, correct, incorrect }) {
+  const disabled = useContext(DisabledContext);
+
   return (
-    <button className={`square ${active ? 'active' : ''}`} onClick={setActive}>
+    <button
+      className={`square ${active ? 'active' : ''}`}
+      onClick={setActive}
+      disabled={disabled}
+    >
       {correct && (
         <div className="feedback correct">
-          <div className="feedback-message">{correct}</div>
+          <div className="feedback-message">{correct.name}</div>
           <FontAwesomeIcon
             className="feedback-icon"
             alt="correct"

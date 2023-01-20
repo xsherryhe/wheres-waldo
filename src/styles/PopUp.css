@@ -1,0 +1,27 @@
+.pop-up {
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.5);
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background-color: white;
+  min-height: 50vh;
+  min-width: 50vw;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.container button.close {
+  align-self: flex-end;
+}

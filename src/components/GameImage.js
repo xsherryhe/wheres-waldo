@@ -29,8 +29,7 @@ export default function GameImage({ image, grid, targets, setFound }) {
   }
 
   function correct(squareId) {
-    const target = targets.find(({ found }) => found === squareId);
-    return target ? target.name : false;
+    return targets.find(({ found }) => found === squareId);
   }
 
   return (

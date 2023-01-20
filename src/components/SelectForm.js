@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import '../styles/SelectForm.css';
 
-import ServerContext from './ServerContext';
+import ServerContext from './contexts/ServerContext';
 
 export default function SelectForm({
   options,
