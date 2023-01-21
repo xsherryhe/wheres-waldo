@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Square.css';
 
-import DisabledContext from './contexts/DisabledContext';
+import GameContext from './contexts/GameContext';
 
 export default function Square({ active, setActive, correct, incorrect }) {
-  const disabled = useContext(DisabledContext);
+  const disabled = useContext(GameContext).complete;
 
   return (
     <button

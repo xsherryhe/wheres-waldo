@@ -18,6 +18,7 @@ export default function SelectForm({
       { mode: 'cors' }
     );
     const data = await response.json();
+    //if(data) displayCorrect, which sends the data back to game through updateGame callback
     if (data.correct) displayCorrect(targetId, squareId);
     else displayIncorrect(squareId);
   }

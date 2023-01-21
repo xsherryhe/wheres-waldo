@@ -1,38 +1,50 @@
 import { useState, useEffect, useContext } from 'react';
+import { CSRFToken } from '../cookies';
 import '../styles/Game.css';
-
 import fireworks from '../images/fireworks.gif';
 
 import Panel from './Panel';
 import GameImage from './GameImage';
 import PopUp from './PopUp';
 import ServerContext from './contexts/ServerContext';
-import DisabledContext from './contexts/DisabledContext';
+import GameContext from './contexts/GameContext';
 
 export default function Game() {
+  const [id, setId] = useState(null);
   const [image, setImage] = useState(null);
   const [grid, setGrid] = useState(null);
   const [targets, setTargets] = useState(null);
+  const [complete, setComplete] = useState(false);
 
   const server = useContext(ServerContext);
 
   useEffect(() => {
-    async function setGame() {
-      const response = await fetch(`${server}/images/4`, {
+    async function startGame() {
+      const response = await fetch(`${server}/games?image=4`, {
         mode: 'cors',
+        method: 'post',
+        credentials: 'include',
+        headers: { 'X-CSRF-Token': CSRFToken(document.cookie) },
       });
       const data = await response.json();
-      setImage(`${server}/image_files/${data.file}`);
+      setId(data.id);
+      setImage(`${server}/image_files/${data.image.file}`);
       setGrid(
-        [...new Array(data.height)].map((_, i) =>
-          [...new Array(data.width)].map((_, j) => `${i},${j}`)
+        [...new Array(data.image.height)].map((_, i) =>
+          [...new Array(data.image.width)].map((_, j) => `${i},${j}`)
         )
       );
-      setTargets(data.targets.map((target) => ({ ...target, found: false })));
+      setTargets(
+        data.game_targets.map(({ target, square }) => ({
+          ...target,
+          squareId: square?.join(','),
+        }))
+      );
     }
-    setGame();
+    startGame();
   }, [server]);
 
+  //updateGame
   function setFound(foundId, squareId) {
     setTargets((targets) => {
       const targetIndex = targets.findIndex(({ id }) => id === foundId);
@@ -43,14 +55,19 @@ export default function Game() {
         ...targets.slice(targetIndex + 1),
       ];
     });
+    //setTargets
+    //setComplete(
+    //data.completionTime
+    //? { time: data.completionTime, highScore: data.highScore }
+    //: false
+    //);
   }
 
-  if (!image) return <div>Loading...</div>;
+  if (!id) return <div>Loading...</div>;
 
-  const win = targets.every(({ found }) => found);
   return (
     <div className="game">
-      <DisabledContext.Provider value={win}>
+      <GameContext.Provider value={{ id, complete: Boolean(complete) }}>
         <Panel targets={targets} />
         <GameImage
           image={image}
@@ -58,13 +75,13 @@ export default function Game() {
           targets={targets}
           setFound={setFound}
         />
-        {win && (
+        {complete && (
           <PopUp closeText="Admire Completed Map">
             <h1>You win!</h1>
             <img src={fireworks} alt="" />
           </PopUp>
         )}
-      </DisabledContext.Provider>
+      </GameContext.Provider>
     </div>
   );
 }
