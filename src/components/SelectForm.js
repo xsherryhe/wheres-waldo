@@ -3,6 +3,7 @@ import fetcher from '../fetcher';
 import '../styles/SelectForm.css';
 
 import ServerContext from './contexts/ServerContext';
+import GameContext from './contexts/GameContext';
 
 export default function SelectForm({
   options,
@@ -11,6 +12,7 @@ export default function SelectForm({
   displayIncorrect,
 }) {
   const server = useContext(ServerContext);
+  const gameId = useContext(GameContext).id;
 
   async function handleChange(e) {
     const targetId = Number(e.target.value);

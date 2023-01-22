@@ -18,6 +18,24 @@ export default function Game() {
 
   const server = useContext(ServerContext);
 
+  function updateTargets(data) {
+    setTargets(
+      data.game_targets.map(({ target, square }) => ({
+        ...target,
+        squareId: square?.join(','),
+      }))
+    );
+  }
+
+  function updateGame(data) {
+    updateTargets(data);
+    //setComplete(
+    //data.completionTime
+    //? { time: data.completionTime, highScore: data.highScore }
+    //: false
+    //);
+  }
+
   useEffect(() => {
     async function startGame() {
       await fetcher(server);
@@ -32,34 +50,12 @@ export default function Game() {
           [...new Array(data.image.width)].map((_, j) => `${i},${j}`)
         )
       );
-      setTargets(
-        data.game_targets.map(({ target, square }) => ({
-          ...target,
-          squareId: square?.join(','),
-        }))
-      );
+      updateTargets(data);
     }
     startGame();
-  }, [server]);
 
-  //updateGame
-  function setFound(foundId, squareId) {
-    setTargets((targets) => {
-      const targetIndex = targets.findIndex(({ id }) => id === foundId);
-      const target = targets[targetIndex];
-      return [
-        ...targets.slice(0, targetIndex),
-        { ...target, found: squareId },
-        ...targets.slice(targetIndex + 1),
-      ];
-    });
-    //setTargets
-    //setComplete(
-    //data.completionTime
-    //? { time: data.completionTime, highScore: data.highScore }
-    //: false
-    //);
-  }
+    // TO DO: Code unmount delete request
+  }, [server]);
 
   if (!id) return <div>Loading...</div>;
 
@@ -71,7 +67,7 @@ export default function Game() {
           image={image}
           grid={grid}
           targets={targets}
-          setFound={setFound}
+          updateGame={updateGame}
         />
         {complete && (
           <PopUp closeText="Admire Completed Map">

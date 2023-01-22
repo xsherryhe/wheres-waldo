@@ -4,7 +4,7 @@ import '../styles/GameImage.css';
 import Square from './Square';
 import SelectForm from './SelectForm';
 
-export default function GameImage({ image, grid, targets, setFound }) {
+export default function GameImage({ image, grid, targets, updateGame }) {
   const [active, setActive] = useState(null);
   const [incorrect, setIncorrect] = useState(null);
   const gameImageRef = useRef();
@@ -17,9 +17,9 @@ export default function GameImage({ image, grid, targets, setFound }) {
     return () => document.removeEventListener('mousedown', handleClickAway);
   }, [gameImageRef]);
 
-  function displayCorrect(targetId, squareId) {
+  function displayCorrect(data) {
     setActive(null);
-    setFound(targetId, squareId);
+    updateGame(data);
   }
 
   function displayIncorrect(squareId) {
@@ -28,8 +28,8 @@ export default function GameImage({ image, grid, targets, setFound }) {
     setTimeout(() => setIncorrect(null), 500);
   }
 
-  function correct(squareId) {
-    return targets.find(({ found }) => found === squareId);
+  function correct(gameSquareId) {
+    return targets.find(({ squareId }) => squareId === gameSquareId);
   }
 
   return (
