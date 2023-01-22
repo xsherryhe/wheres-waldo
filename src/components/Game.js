@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { CSRFToken } from '../cookies';
+import fetcher from '../fetcher';
 import '../styles/Game.css';
 import fireworks from '../images/fireworks.gif';
 
@@ -20,11 +20,9 @@ export default function Game() {
 
   useEffect(() => {
     async function startGame() {
-      const response = await fetch(`${server}/games?image=4`, {
-        mode: 'cors',
-        method: 'post',
-        credentials: 'include',
-        headers: { 'X-CSRF-Token': CSRFToken(document.cookie) },
+      await fetcher(server);
+      const response = await fetcher(`${server}/games?image=4`, {
+        method: 'POST',
       });
       const data = await response.json();
       setId(data.id);

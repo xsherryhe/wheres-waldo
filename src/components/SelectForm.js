@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import fetcher from '../fetcher';
 import '../styles/SelectForm.css';
 
 import ServerContext from './contexts/ServerContext';
@@ -13,13 +14,12 @@ export default function SelectForm({
 
   async function handleChange(e) {
     const targetId = Number(e.target.value);
-    const response = await fetch(
-      `${server}/targets/${targetId}?selection=${squareId}`,
-      { mode: 'cors' }
+    const response = await fetcher(
+      `${server}/games/${gameId}?selection=${squareId}&target=${targetId}`,
+      { method: 'PATCH' }
     );
     const data = await response.json();
-    //if(data) displayCorrect, which sends the data back to game through updateGame callback
-    if (data.correct) displayCorrect(targetId, squareId);
+    if (data) displayCorrect(data);
     else displayIncorrect(squareId);
   }
 
