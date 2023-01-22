@@ -60,9 +60,10 @@ export default function Game() {
 
   if (!id) return <div>Loading...</div>;
 
+  // TO DO: Move win pop up into separate component and pass in GameContext
   return (
     <div className="game">
-      <GameContext.Provider value={{ id, complete: Boolean(complete) }}>
+      <GameContext.Provider value={{ id, complete }}>
         <Panel targets={targets} />
         <GameImage
           image={image}
@@ -75,7 +76,12 @@ export default function Game() {
             <h1>You win!</h1>
             <img src={fireworks} alt="" />
             <p>You completed the map in {secondsToHMS(complete.time)}.</p>
-            {complete.highScore && <p>Your time is in the Top Best Times!</p>}
+            {complete.highScore && <p>Your time made the High Scores!</p>}
+            <button>
+              {complete.highScore
+                ? 'See High Scores'
+                : 'Add Your Name to High Scores'}
+            </button>
           </PopUp>
         )}
       </GameContext.Provider>

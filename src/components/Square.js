@@ -6,7 +6,7 @@ import '../styles/Square.css';
 import GameContext from './contexts/GameContext';
 
 export default function Square({ active, setActive, correct, incorrect }) {
-  const disabled = useContext(GameContext).complete;
+  const disabled = Boolean(useContext(GameContext).complete);
 
   return (
     <button
