@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import fetcher from '../fetcher';
 import '../styles/Game.css';
 import fireworks from '../images/fireworks.gif';
+import { secondsToHMS } from '../utilities';
 
 import Panel from './Panel';
 import GameImage from './GameImage';
@@ -20,7 +21,7 @@ export default function Game() {
 
   function updateTargets(data) {
     setTargets(
-      data.game_targets.map(({ target, square }) => ({
+      data.targets.map(({ target, square }) => ({
         ...target,
         squareId: square?.join(','),
       }))
@@ -29,11 +30,11 @@ export default function Game() {
 
   function updateGame(data) {
     updateTargets(data);
-    //setComplete(
-    //data.completionTime
-    //? { time: data.completionTime, highScore: data.highScore }
-    //: false
-    //);
+    setComplete(
+      data.completion_time
+        ? { time: data.completion_time, highScore: data.high_score }
+        : false
+    );
   }
 
   useEffect(() => {
@@ -73,6 +74,8 @@ export default function Game() {
           <PopUp closeText="Admire Completed Map">
             <h1>You win!</h1>
             <img src={fireworks} alt="" />
+            <p>You completed the map in {secondsToHMS(complete.time)}.</p>
+            {complete.highScore && <p>Your time is in the Top Best Times!</p>}
           </PopUp>
         )}
       </GameContext.Provider>
