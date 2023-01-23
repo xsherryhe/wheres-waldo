@@ -1,23 +1,17 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import '../styles/PopUp.css';
 
 import CloseButton from './CloseButton';
+import PopUpContext from './contexts/PopUpContext';
 
-export default function PopUp({ children, closeText, setOpen = () => {} }) {
-  const [closed, setClosed] = useState(false);
-
-  function close() {
-    setOpen(false);
-    setClosed(true);
-  }
-
-  if (closed) return null;
+export default function PopUp({ children }) {
+  const close = useContext(PopUpContext).close;
+  
   return (
     <div className="pop-up">
       <div className="container">
         <CloseButton onClick={close} />
         {children}
-        {closeText && <button onClick={close}>{closeText}</button>}
       </div>
     </div>
   );

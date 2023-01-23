@@ -4,9 +4,12 @@ import { faXmark, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Square.css';
 
 import GameContext from './contexts/GameContext';
+import PopUpContext from './contexts/PopUpContext';
 
 export default function Square({ active, setActive, correct, incorrect }) {
-  const disabled = Boolean(useContext(GameContext).complete);
+  const complete = useContext(GameContext).complete;
+  const popUpPresent = useContext(PopUpContext).content;
+  const disabled = Boolean(complete || popUpPresent);
 
   return (
     <button

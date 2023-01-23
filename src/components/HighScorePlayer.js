@@ -10,12 +10,13 @@ export default function HighScorePlayer({ score }) {
   const game = useContext(GameContext);
   const currentGame = score.id === game.id && game.complete?.highScore;
 
-  if (formOn || (currentGame && !player))
+  if (formOn || (currentGame && player === null))
     return (
       <HighScorePlayerForm
         player={player || ''}
         setPlayer={setPlayer}
         token={game.complete.highScore}
+        close={() => setFormOn(false)}
       />
     );
 

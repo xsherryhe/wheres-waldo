@@ -1,40 +1,45 @@
 import { useState, useEffect, useContext } from 'react';
 import fetcher from '../fetcher';
-import '../styles/Game.css';
-import fireworks from '../images/fireworks.gif';
 import { secondsToHMS } from '../utilities';
+import '../styles/Game.css';
 
 import Panel from './Panel';
 import GameImage from './GameImage';
-import PopUp from './PopUp';
+import GameComplete from './GameComplete';
 import ServerContext from './contexts/ServerContext';
 import GameContext from './contexts/GameContext';
+import PopUpContext from './contexts/PopUpContext';
 
 export default function Game() {
-  const [id, setId] = useState(null);
+  const [ids, setIds] = useState(null);
   const [image, setImage] = useState(null);
   const [grid, setGrid] = useState(null);
   const [targets, setTargets] = useState(null);
   const [complete, setComplete] = useState(false);
 
   const server = useContext(ServerContext);
+  const popUp = useContext(PopUpContext);
 
-  function updateTargets(data) {
-    setTargets(
-      data.targets.map(({ target, square }) => ({
-        ...target,
-        squareId: square?.join(','),
-      }))
-    );
+  function updateTarget({ target, square }) {
+    setTargets((targets) => {
+      const targetIndex = targets.findIndex(({ id }) => id === target.id);
+      return [
+        ...targets.slice(0, targetIndex),
+        { ...targets[targetIndex], squareId: square.join(',') },
+        ...targets.slice(targetIndex + 1),
+      ];
+    });
   }
 
   function updateGame(data) {
-    updateTargets(data);
-    setComplete(
-      data.completion_time
-        ? { time: data.completion_time, highScore: data.high_score }
-        : false
-    );
+    updateTarget(data.target);
+    if (data.completion_time) {
+      setComplete({
+        time: secondsToHMS(data.completion_time),
+        highScore: data.high_score,
+      });
+      popUp.set(<GameComplete />);
+    }
   }
 
   useEffect(() => {
@@ -44,26 +49,27 @@ export default function Game() {
         method: 'POST',
       });
       const data = await response.json();
-      setId(data.id);
+      setIds({ game: data.id, image: data.image.id });
       setImage(`${server}/image_files/${data.image.file}`);
       setGrid(
         [...new Array(data.image.height)].map((_, i) =>
           [...new Array(data.image.width)].map((_, j) => `${i},${j}`)
         )
       );
-      updateTargets(data);
+      setTargets(data.targets.map(({ target }) => target));
     }
     startGame();
 
     // TO DO: Code unmount delete request
   }, [server]);
 
-  if (!id) return <div>Loading...</div>;
+  if (!ids) return <div>Loading...</div>;
 
-  // TO DO: Move win pop up into separate component and pass in GameContext
   return (
     <div className="game">
-      <GameContext.Provider value={{ id, complete }}>
+      <GameContext.Provider
+        value={{ id: ids.game, complete, image: ids.image }}
+      >
         <Panel targets={targets} />
         <GameImage
           image={image}
@@ -71,19 +77,7 @@ export default function Game() {
           targets={targets}
           updateGame={updateGame}
         />
-        {complete && (
-          <PopUp closeText="Admire Completed Map">
-            <h1>You win!</h1>
-            <img src={fireworks} alt="" />
-            <p>You completed the map in {secondsToHMS(complete.time)}.</p>
-            {complete.highScore && <p>Your time made the High Scores!</p>}
-            <button>
-              {complete.highScore
-                ? 'See High Scores'
-                : 'Add Your Name to High Scores'}
-            </button>
-          </PopUp>
-        )}
+        {popUp.content}
       </GameContext.Provider>
     </div>
   );
