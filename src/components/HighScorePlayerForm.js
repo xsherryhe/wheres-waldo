@@ -4,7 +4,6 @@ import fetcher from '../fetcher';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
-import ServerContext from './contexts/ServerContext';
 import GameContext from './contexts/GameContext';
 
 export default function HighScorePlayerForm({
@@ -17,8 +16,6 @@ export default function HighScorePlayerForm({
   const [playerInput, setPlayerInput] = useState(player);
   const [playerError, setPlayerError] = useState(null);
   const playerInputRef = useRef();
-
-  const server = useContext(ServerContext);
   const gameId = useContext(GameContext).id;
 
   function handleChange(e) {
@@ -39,7 +36,7 @@ export default function HighScorePlayerForm({
     e.preventDefault();
     if (!validate()) return;
     setDisabled(true);
-    const response = await fetcher(`${server}/games/${gameId}`, {
+    const response = await fetcher(`games/${gameId}`, {
       method: 'PATCH',
       body: new FormData(e.target),
     });

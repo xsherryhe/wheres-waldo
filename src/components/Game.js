@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import fetcher from '../fetcher';
+import server from '../server';
 import { secondsToHMS } from '../utilities';
 import '../styles/Game.css';
 
 import Panel from './Panel';
 import GameImage from './GameImage';
 import GameComplete from './GameComplete';
-import ServerContext from './contexts/ServerContext';
 import GameContext from './contexts/GameContext';
 import PopUpContext from './contexts/PopUpContext';
 
@@ -17,7 +17,6 @@ export default function Game() {
   const [targets, setTargets] = useState(null);
   const [complete, setComplete] = useState(false);
 
-  const server = useContext(ServerContext);
   const popUp = useContext(PopUpContext);
 
   function updateTarget({ target, square }) {
@@ -44,8 +43,8 @@ export default function Game() {
 
   useEffect(() => {
     async function startGame() {
-      await fetcher(server);
-      const response = await fetcher(`${server}/games?image=4`, {
+      await fetcher();
+      const response = await fetcher(`games?image=4`, {
         method: 'POST',
       });
       const data = await response.json();
@@ -61,7 +60,7 @@ export default function Game() {
     startGame();
 
     // TO DO: Code unmount delete request
-  }, [server]);
+  }, []);
 
   if (!ids) return <div>Loading...</div>;
 

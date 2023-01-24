@@ -3,20 +3,17 @@ import '../styles/HighScore.css';
 import fetcher from '../fetcher';
 import { secondsToHMS } from '../utilities';
 
-import ServerContext from './contexts/ServerContext';
 import GameContext from './contexts/GameContext';
 import PopUp from './PopUp';
 import HighScorePlayer from './HighScorePlayer';
 
 export default function HighScore({ footer }) {
   const [scores, setScores] = useState(null);
-
-  const server = useContext(ServerContext);
   const image = useContext(GameContext).image;
 
   useEffect(() => {
     async function getHighScores() {
-      const response = await fetcher(`${server}/images/${image}/games`);
+      const response = await fetcher(`images/${image}/games`);
       const data = await response.json();
       const scores = data.map(({ id, player, completion_time }) => ({
         id,
@@ -26,7 +23,7 @@ export default function HighScore({ footer }) {
       setScores(scores);
     }
     getHighScores();
-  }, [server, image]);
+  }, [image]);
 
   let content = <div>'Loading...'</div>;
   if (scores)
