@@ -1,0 +1,10 @@
+.high-score-player-form {
+  display: grid;
+  grid-template: repeat(2, max-content) / repeat(2, max-content);
+  gap: 0.2rem;
+}
+
+.high-score-player-form label {
+  font-weight: bold;
+  grid-column: 1 / span 2;
+}

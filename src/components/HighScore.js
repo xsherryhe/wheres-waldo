@@ -1,12 +1,14 @@
 import { useState, useContext, useEffect } from 'react';
+import '../styles/HighScore.css';
 import fetcher from '../fetcher';
+import { secondsToHMS } from '../utilities';
 
 import ServerContext from './contexts/ServerContext';
 import GameContext from './contexts/GameContext';
 import PopUp from './PopUp';
-import HighScoreEntry from './HighScoreEntry';
+import HighScorePlayer from './HighScorePlayer';
 
-export default function HighScore() {
+export default function HighScore({ footer }) {
   const [scores, setScores] = useState(null);
 
   const server = useContext(ServerContext);
@@ -26,16 +28,36 @@ export default function HighScore() {
     getHighScores();
   }, [server, image]);
 
+  let content = <div>'Loading...'</div>;
+  if (scores)
+    content = (
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {scores.map((score, i) => (
+            <tr key={score.id}>
+              <td className="rank">{i + 1}</td>
+              <td>
+                <HighScorePlayer score={score} />
+              </td>
+              <td>{secondsToHMS(score.time)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+
   return (
-    <PopUp>
+    <PopUp contentClassName="high-score">
       <h2>High Scores</h2>
-      {scores
-        ? scores.map((score, i) => (
-            <div key={score.id}>
-              {i + 1}. <HighScoreEntry score={score} />
-            </div>
-          ))
-        : 'Loading...'}
+      {content}
+      {footer}
     </PopUp>
   );
 }

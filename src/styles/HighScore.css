@@ -1,0 +1,35 @@
+.high-score > * {
+  margin: 0.5rem;
+}
+
+.high-score > h2 {
+  margin: 0;
+}
+
+.high-score table {
+  border-spacing: 0;
+  border-radius: 0.2rem;
+  border: 2px solid black;
+  margin-bottom: 1rem;
+}
+
+.high-score thead {
+  background-color: darkgreen;
+  color: white;
+}
+
+.high-score th, .high-score td {
+  padding: 0.5rem 4vw;
+}
+
+.high-score tr:nth-child(even) {
+  background-color: lightgreen;
+}
+
+.high-score .rank {
+  font-weight: bold;
+}
+
+.high-score td:not(.rank) {
+  text-align: left;
+}

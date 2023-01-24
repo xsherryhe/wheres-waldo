@@ -1,4 +1,7 @@
 import { useState, useContext } from 'react';
+import '../styles/HighScorePlayer.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 import GameContext from './contexts/GameContext';
 import HighScorePlayerForm from './HighScorePlayerForm';
@@ -21,9 +24,13 @@ export default function HighScorePlayer({ score }) {
     );
 
   return (
-    <span>
+    <span className="high-score-player">
       {player || `Player ${score.id}`}
-      {currentGame && <button onClick={() => setFormOn(true)}>Edit</button>}
+      {currentGame && (
+        <button onClick={() => setFormOn(true)} className="edit icon">
+          <FontAwesomeIcon icon={faPenToSquare} alt="edit" />
+        </button>
+      )}
     </span>
   );
 }

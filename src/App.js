@@ -13,7 +13,9 @@ function App() {
 
   return (
     <div className="App">
-      <PopUpContext.Provider value={{ content: popUp, set: setPopUp, close: closePopUp }}>
+      <PopUpContext.Provider
+        value={{ content: popUp, set: setPopUp, close: closePopUp }}
+      >
         <Game />
       </PopUpContext.Provider>
     </div>

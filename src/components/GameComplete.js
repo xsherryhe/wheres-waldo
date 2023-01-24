@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import '../styles/GameComplete.css';
 import fireworks from '../images/fireworks.gif';
 
 import GameContext from './contexts/GameContext';
@@ -10,20 +11,29 @@ export default function GameComplete() {
   const popUp = useContext(PopUpContext);
   const complete = useContext(GameContext).complete;
 
+  const closeButton = (
+    <button onClick={popUp.close}>Admire Completed Map</button>
+  );
   return (
-    <PopUp>
+    <PopUp contentClassName="game-complete">
       <h1>You win!</h1>
       <img src={fireworks} alt="" />
-      <p>You completed the map in {complete.time}.</p>
-      {complete.highScore && <p>Your time made the High Scores!</p>}
-      <HighScoreButton
-        text={
-          complete.highScore
-            ? 'Add Your Name to High Scores'
-            : 'See High Scores'
-        }
-      />
-      <button onClick={popUp.close}>Admire Completed Map</button>
+      <div className="message">
+        <p>You completed the map in {complete.time}.</p>
+        {complete.highScore && (
+          <p className="high-score-message">
+            <span>Your time made the High Scores!</span>
+          </p>
+        )}
+      </div>
+      {complete.highScore ? (
+        <HighScoreButton
+          text="Add Your Name to High Scores"
+          footer={closeButton}
+        />
+      ) : (
+        { closeButton }
+      )}
     </PopUp>
   );
 }

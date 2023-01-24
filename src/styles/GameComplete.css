@@ -1,0 +1,19 @@
+.game-complete {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.game-complete .message {
+  margin: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.game-complete .high-score-message {
+  font-weight: bold;
+  display: flex;
+  gap: 0.5rem;
+}

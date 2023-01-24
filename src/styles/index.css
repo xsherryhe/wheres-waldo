@@ -23,6 +23,18 @@ button:not(.icon):not(.square) {
   padding: 1rem 1.5rem;
 }
 
+button.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  margin: 0;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
