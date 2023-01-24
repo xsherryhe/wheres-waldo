@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './styles/App.css';
 
 import PopUpContext from './components/contexts/PopUpContext';
-import Game from './components/Game';
+import Home from './components/Home';
 
 function App() {
   const [popUp, setPopUp] = useState(null);
@@ -16,7 +16,7 @@ function App() {
       <PopUpContext.Provider
         value={{ content: popUp, set: setPopUp, close: closePopUp }}
       >
-        <Game />
+        <Home />
       </PopUpContext.Provider>
     </div>
   );

@@ -1,0 +1,18 @@
+.home {
+  padding: 1rem 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 30vw);
+  justify-items: stretch;
+  gap: 2rem;
+}
+
+.home > * {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.home img {
+  height: 30vh;
+  object-fit: cover;
+}
