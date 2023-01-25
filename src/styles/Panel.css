@@ -1,3 +1,8 @@
+.panel {
+  background-color: white;
+  padding: 1rem;
+}
+
 .panel .instructions {
   margin-top: 0;
 }
@@ -5,7 +10,8 @@
 .panel .targets {
   display: grid;
   grid-template-columns: repeat(2, 6rem);
+  grid-auto-rows: 8rem;
   justify-items: center;
-  align-items: center;
+  align-items: stretch;
   gap: 1rem;
 }
