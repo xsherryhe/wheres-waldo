@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import fetcher from '../fetcher';
 import '../styles/SelectForm.css';
 
@@ -10,9 +10,11 @@ export default function SelectForm({
   displayCorrect,
   displayIncorrect,
 }) {
+  const [disabled, setDisabled] = useState(false);
   const gameId = useContext(GameContext).id;
 
   async function handleChange(e) {
+    setDisabled(true);
     const targetId = Number(e.target.value);
     const response = await fetcher(
       `games/${gameId}?selection=${squareId}&target=${targetId}`,
@@ -25,8 +27,13 @@ export default function SelectForm({
 
   return (
     <form className="select" action="">
-      <select name="selection" id="selection" onChange={handleChange}>
-        <option value="">-- Who or what is here? --</option>
+      <select
+        name="selection"
+        id="selection"
+        onChange={handleChange}
+        disabled={disabled}
+      >
+        <option value="">Who or what is here?</option>
         {options.map(({ id, name }) => (
           <option key={id} value={id}>
             {name}

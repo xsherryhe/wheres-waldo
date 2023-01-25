@@ -1,11 +1,25 @@
 .game-image {
+  position: relative;
+}
+
+.game-image .image {
+  position: absolute;
+  z-index: -2;
+  top: 0;
   height: 525px;
   width: 750px;
   background-size: cover;
-  display: grid;
   flex: none;
 }
 
-.game-image>* {
+.game-image .grid {
+  display: grid;
+  height: 525px;
+  width: 750px;
+  background-size: cover;
+  flex: none;
+}
+
+.game-image .grid>* {
   position: relative;
 }

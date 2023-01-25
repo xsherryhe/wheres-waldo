@@ -14,13 +14,14 @@
 
 .square .feedback {
   position: absolute;
-  left: -0.5rem;
-  z-index: 1;
+  z-index: -1;
 }
 
 .square .correct {
+  width: 8rem;
   color: green;
-  top: -150%;
+  left: -3rem;
+  bottom: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,7 +50,8 @@
 }
 
 .square .incorrect {
-  top: 0;
+  top: -0.5rem;
+  left: -0.5rem;
   background-color: white;
   border: 2px solid red;
   border-radius: 50%;

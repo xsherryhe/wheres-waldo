@@ -10,9 +10,9 @@ import GameComplete from './GameComplete';
 import GameContext from './contexts/GameContext';
 import PopUpContext from './contexts/PopUpContext';
 
-export default function Game() {
+export default function Game({ image }) {
   const [ids, setIds] = useState(null);
-  const [image, setImage] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
   const [grid, setGrid] = useState(null);
   const [targets, setTargets] = useState(null);
   const [complete, setComplete] = useState(false);
@@ -44,12 +44,12 @@ export default function Game() {
   useEffect(() => {
     async function startGame() {
       await fetcher();
-      const response = await fetcher(`games?image=4`, {
+      const response = await fetcher(`images/${image}/games`, {
         method: 'POST',
       });
       const data = await response.json();
       setIds({ game: data.id, image: data.image.id });
-      setImage(`${server}/image_files/${data.image.file}`);
+      setImageFile(`${server}/image_files/${data.image.file}`);
       setGrid(
         [...new Array(data.image.height)].map((_, i) =>
           [...new Array(data.image.width)].map((_, j) => `${i},${j}`)
@@ -60,7 +60,7 @@ export default function Game() {
     startGame();
 
     // TO DO: Code unmount delete request
-  }, []);
+  }, [image]);
 
   if (!ids) return <div>Loading...</div>;
 
@@ -71,7 +71,7 @@ export default function Game() {
       >
         <Panel targets={targets} />
         <GameImage
-          image={image}
+          file={imageFile}
           grid={grid}
           targets={targets}
           updateGame={updateGame}

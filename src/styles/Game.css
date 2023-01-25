@@ -1,8 +1,8 @@
 .game {
-  padding: 5rem 1rem 2rem;
+  padding: 4rem 5rem 2rem 1rem;
   display: flex;
   justify-content: center;
-  gap: 4rem;
+  gap: 2rem;
 }
 
 .game h1 {

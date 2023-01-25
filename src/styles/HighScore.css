@@ -1,9 +1,16 @@
-.high-score > * {
-  margin: 0.5rem;
+.high-score {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
 }
 
 .high-score > h2 {
   margin: 0;
+}
+
+.high-score .content {
+  min-height: 28vh;
 }
 
 .high-score table {
@@ -19,7 +26,7 @@
 }
 
 .high-score th, .high-score td {
-  padding: 0.5rem 4vw;
+  padding: 0.5rem 3vw;
 }
 
 .high-score tr:nth-child(even) {

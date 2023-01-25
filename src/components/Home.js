@@ -1,28 +1,16 @@
-import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/Home.css';
-import fetcher from '../fetcher';
 import server from '../server';
+import { parameterize } from '../utilities';
 
-export default function Home() {
-  const [games, setGames] = useState(null);
-
-  useEffect(() => {
-    async function getGames() {
-      const response = await fetcher('images');
-      const data = await response.json();
-      setGames(data);
-    }
-    getGames();
-  }, []);
-
-  if (!games) return <div>Loading...</div>;
+export default function Home({ games }) {
   return (
     <div className="home">
       {games.map(({ id, name, file }) => (
-        <div key={id}>
+        <Link key={id} to={parameterize(name)}>
           <img src={`${server}/image_files/${file}`} alt="" />
           <div className="name">{name}</div>
-        </div>
+        </Link>
       ))}
     </div>
   );

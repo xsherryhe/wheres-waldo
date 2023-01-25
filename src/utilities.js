@@ -6,3 +6,7 @@ export function secondsToHMS(totalSeconds) {
     .join(':');
   return `${hours ? hours + ':' : ''}${time}`;
 }
+
+export function parameterize(string) {
+  return string.toLowerCase().replace(/ /g, '-');
+}

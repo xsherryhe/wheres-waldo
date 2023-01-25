@@ -2,12 +2,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .target img {
   height: 5rem;
-  object-fit: cover;
-  object-position: top;
+  max-width: 6rem;
+  object-fit: contain;
 }
 
 .target .check {
