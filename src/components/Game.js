@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import fetcher from '../fetcher';
 import server from '../server';
 import { secondsToHMS } from '../utilities';
@@ -18,6 +18,7 @@ export default function Game({ image }) {
   const [targets, setTargets] = useState(null);
   const [complete, setComplete] = useState(false);
 
+  const open = useRef(true);
   const popUp = useContext(PopUpContext);
 
   function updateTarget({ target, square }) {
@@ -44,7 +45,6 @@ export default function Game({ image }) {
 
   useEffect(() => {
     async function startGame() {
-      await fetcher();
       const response = await fetcher(`images/${image}/games`, {
         method: 'POST',
       });
@@ -59,9 +59,15 @@ export default function Game({ image }) {
       setTargets(data.targets.map(({ target }) => target));
     }
     startGame();
-
-    // TO DO: Code unmount delete request
   }, [image]);
+
+  open.current = !complete;
+  useEffect(() => {
+    return () => {
+      if (ids && open.current)
+        fetcher(`games/${ids.game}`, { method: 'DELETE' });
+    };
+  }, [ids]);
 
   if (!ids) return <div>Loading...</div>;
 
