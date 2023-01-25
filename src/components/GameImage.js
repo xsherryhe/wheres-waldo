@@ -4,8 +4,15 @@ import '../styles/GameImage.css';
 import Square from './Square';
 import SelectForm from './SelectForm';
 
-export default function GameImage({ file, grid, targets, updateGame }) {
+export default function GameImage({
+  file,
+  grid,
+  targets,
+  showFeedback,
+  updateGame,
+}) {
   const [active, setActive] = useState(null);
+  const [newCorrect, setNewCorrect] = useState(null);
   const [incorrect, setIncorrect] = useState(null);
   const gameImageRef = useRef();
 
@@ -17,8 +24,10 @@ export default function GameImage({ file, grid, targets, updateGame }) {
     return () => document.removeEventListener('mousedown', handleClickAway);
   }, [gameImageRef]);
 
-  function displayCorrect(data) {
+  function displayCorrect(data, squareId) {
     setActive(null);
+    setNewCorrect(squareId);
+    setTimeout(() => setNewCorrect(null), 750);
     updateGame(data);
   }
 
@@ -50,6 +59,7 @@ export default function GameImage({ file, grid, targets, updateGame }) {
                 setActive={() => setActive(id)}
                 correct={correct(id)}
                 incorrect={incorrect === id}
+                showFeedback={newCorrect === id || showFeedback}
               />
               {active === id && (
                 <SelectForm

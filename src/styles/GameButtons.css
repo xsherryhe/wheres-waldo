@@ -1,0 +1,6 @@
+.game-buttons {
+  align-self: start;
+  padding-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-evenly;
+}

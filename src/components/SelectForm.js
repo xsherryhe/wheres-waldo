@@ -22,7 +22,7 @@ export default function SelectForm({
       { method: 'PATCH' }
     );
     const data = await response.json();
-    if (data) displayCorrect(data);
+    if (data) displayCorrect(data, squareId);
     else displayIncorrect(squareId);
   }
 

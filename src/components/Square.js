@@ -6,7 +6,13 @@ import '../styles/Square.css';
 import GameContext from './contexts/GameContext';
 import PopUpContext from './contexts/PopUpContext';
 
-export default function Square({ active, setActive, correct, incorrect }) {
+export default function Square({
+  active,
+  setActive,
+  correct,
+  incorrect,
+  showFeedback,
+}) {
   const complete = useContext(GameContext).complete;
   const popUpPresent = useContext(PopUpContext).content;
   const disabled = Boolean(complete || popUpPresent);
@@ -17,7 +23,7 @@ export default function Square({ active, setActive, correct, incorrect }) {
       onClick={setActive}
       disabled={disabled}
     >
-      {correct && (
+      {correct && showFeedback && (
         <div className="feedback correct">
           <div className="feedback-message">{correct.name}</div>
           <FontAwesomeIcon

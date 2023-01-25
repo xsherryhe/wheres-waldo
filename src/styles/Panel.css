@@ -1,6 +1,8 @@
 .panel {
   background-color: white;
   padding: 1rem;
+  border-radius: 0.2rem;
+  grid-row: 1 / span 2;
 }
 
 .panel .instructions {

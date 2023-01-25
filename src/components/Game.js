@@ -6,6 +6,7 @@ import '../styles/Game.css';
 
 import Header from './Header';
 import Panel from './Panel';
+import GameButtons from './GameButtons';
 import GameImage from './GameImage';
 import GameComplete from './GameComplete';
 import GameContext from './contexts/GameContext';
@@ -17,6 +18,7 @@ export default function Game({ image }) {
   const [grid, setGrid] = useState(null);
   const [targets, setTargets] = useState(null);
   const [complete, setComplete] = useState(false);
+  const [feedbackOn, setFeedbackOn] = useState(true);
 
   const open = useRef(true);
   const popUp = useContext(PopUpContext);
@@ -39,6 +41,7 @@ export default function Game({ image }) {
         time: secondsToHMS(data.completion_time),
         highScore: data.high_score,
       });
+      setFeedbackOn(true);
       popUp.set(<GameComplete />);
     }
   }
@@ -72,11 +75,18 @@ export default function Game({ image }) {
   let main = 'Loading...';
   if (ids)
     main = [
-      <Panel targets={targets} />,
+      <Panel key="panel" targets={targets} />,
+      <GameButtons
+        key="game-buttons"
+        feedbackOn={feedbackOn}
+        setFeedbackOn={setFeedbackOn}
+      />,
       <GameImage
+        key="game-image"
         file={imageFile}
         grid={grid}
         targets={targets}
+        showFeedback={feedbackOn}
         updateGame={updateGame}
       />,
     ];
