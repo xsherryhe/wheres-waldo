@@ -25,7 +25,6 @@ function App() {
     getGames();
   }, []);
 
-  if (!games) return <div>Loading...</div>;
   return (
     <div className="App">
       <BrowserRouter>
@@ -34,7 +33,7 @@ function App() {
         >
           <Routes>
             <Route path="/" element={<Home games={games} />} />
-            {games.map(({ id, name }) => (
+            {games?.map(({ id, name }) => (
               <Route
                 key={id}
                 path={parameterize(name)}

@@ -9,9 +9,15 @@ export default function Header() {
   const game = useContext(GameContext);
   return (
     <header>
-      <Link to="/">Where's Everything?</Link>
-      {game && <Link to="/">Home</Link>}
-      {game && <HighScoreButton />}
+      <Link className="logo" to="/">
+        Where's Everything?
+      </Link>
+      {game && (
+        <Link className="home" to="/">
+          Home
+        </Link>
+      )}
+      {game?.image && <HighScoreButton />}
     </header>
   );
 }

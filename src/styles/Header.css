@@ -2,8 +2,8 @@ header {
   background-color: green;
   color: white;
   padding: 1rem;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
 
@@ -11,9 +11,18 @@ header a {
   color: white;
 }
 
+header a.logo {
+  justify-self: start;
+}
+
+header a.home {
+  justify-self: center;
+}
+
 header button:not(.square):not(.icon) {
   color: white;
   padding: 0;
   background-color: transparent;
   border: none;
+  justify-self: end;
 }

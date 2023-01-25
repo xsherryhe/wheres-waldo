@@ -25,9 +25,9 @@ export default function HighScore({ footer }) {
     getHighScores();
   }, [image]);
 
-  let content = 'Loading...';
+  let main = 'Loading...';
   if (scores)
-    content = (
+    main = (
       <table>
         <thead>
           <tr>
@@ -53,7 +53,7 @@ export default function HighScore({ footer }) {
   return (
     <PopUp contentClassName="high-score">
       <h2>High Scores</h2>
-      <div className="content">{content}</div>
+      <main>{main}</main>
       <footer>{footer}</footer>
     </PopUp>
   );
