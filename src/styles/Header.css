@@ -1,0 +1,19 @@
+header {
+  background-color: green;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+header a {
+  color: white;
+}
+
+header button:not(.square):not(.icon) {
+  color: white;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}

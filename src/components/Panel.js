@@ -1,7 +1,6 @@
 import '../styles/Panel.css';
 
 import Target from './Target';
-import HighScoreButton from './HighScoreButton';
 
 export default function Panel({ targets }) {
   return (
@@ -12,7 +11,6 @@ export default function Panel({ targets }) {
           <Target key={id} name={name} file={file} found={Boolean(squareId)} />
         ))}
       </div>
-      <HighScoreButton />
     </div>
   );
 }

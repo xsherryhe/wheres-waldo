@@ -4,6 +4,7 @@ import server from '../server';
 import { secondsToHMS } from '../utilities';
 import '../styles/Game.css';
 
+import Header from './Header';
 import Panel from './Panel';
 import GameImage from './GameImage';
 import GameComplete from './GameComplete';
@@ -69,13 +70,16 @@ export default function Game({ image }) {
       <GameContext.Provider
         value={{ id: ids.game, complete, image: ids.image }}
       >
-        <Panel targets={targets} />
-        <GameImage
-          file={imageFile}
-          grid={grid}
-          targets={targets}
-          updateGame={updateGame}
-        />
+        <Header />
+        <main>
+          <Panel targets={targets} />
+          <GameImage
+            file={imageFile}
+            grid={grid}
+            targets={targets}
+            updateGame={updateGame}
+          />
+        </main>
         {popUp.content}
       </GameContext.Provider>
     </div>
