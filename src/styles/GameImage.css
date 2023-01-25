@@ -1,5 +1,6 @@
 .game-image {
   position: relative;
+  z-index: 0;
 }
 
 .game-image .image {

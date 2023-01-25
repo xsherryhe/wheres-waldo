@@ -12,6 +12,15 @@ form.select {
   gap: 0.25rem;
 }
 
+form.select.start {
+  left: 0;
+}
+
+form.select.end {
+  left: auto;
+  right: 0;
+}
+
 form.select select {
   text-align: center;
 }

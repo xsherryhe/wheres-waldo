@@ -9,6 +9,7 @@ export default function SelectForm({
   squareId,
   displayCorrect,
   displayIncorrect,
+  offset,
 }) {
   const [disabled, setDisabled] = useState(false);
   const gameId = useContext(GameContext).id;
@@ -26,7 +27,7 @@ export default function SelectForm({
   }
 
   return (
-    <form className="select" action="">
+    <form className={`select ${offset}`} action="">
       <select
         name="selection"
         id="selection"

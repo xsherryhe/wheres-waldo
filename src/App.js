@@ -10,19 +10,19 @@ import Game from './components/Game';
 
 function App() {
   const [popUp, setPopUp] = useState(null);
-  const [games, setGames] = useState(null);
+  const [images, setImages] = useState(null);
 
   function closePopUp() {
     setPopUp(null);
   }
 
   useEffect(() => {
-    async function getGames() {
+    async function getImages() {
       const response = await fetcher('images');
       const data = await response.json();
-      setGames(data);
+      setImages(data);
     }
-    getGames();
+    getImages();
   }, []);
 
   return (
@@ -32,8 +32,8 @@ function App() {
           value={{ content: popUp, set: setPopUp, close: closePopUp }}
         >
           <Routes>
-            <Route path="/" element={<Home games={games} />} />
-            {games?.map(({ id, name }) => (
+            <Route path="/" element={<Home images={images} />} />
+            {images?.map(({ id, name }) => (
               <Route
                 key={id}
                 path={parameterize(name)}

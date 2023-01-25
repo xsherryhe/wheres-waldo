@@ -1,8 +1,12 @@
 .game main {
-  padding: 2.5rem 4.5rem 1rem 1rem;
+  padding: 1rem 1rem 0;
+  margin: 1rem 3.5rem 1rem 1rem;
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  align-items: center;
+  gap: 1rem;
+  background-color: lightgreen;
+  width: max-content;
 }
 
 .game main h1 {

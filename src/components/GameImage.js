@@ -43,7 +43,7 @@ export default function GameImage({ file, grid, targets, updateGame }) {
         ref={gameImageRef}
       >
         {grid.map((row) =>
-          row.map((id) => (
+          row.map((id, col) => (
             <div key={id}>
               <Square
                 active={active === id}
@@ -57,6 +57,7 @@ export default function GameImage({ file, grid, targets, updateGame }) {
                   squareId={id}
                   displayCorrect={displayCorrect}
                   displayIncorrect={displayIncorrect}
+                  offset={{ 0: 'start', [row.length - 1]: 'end' }[col] || ''}
                 />
               )}
             </div>

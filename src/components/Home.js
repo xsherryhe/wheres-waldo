@@ -4,10 +4,10 @@ import server from '../server';
 import { parameterize } from '../utilities';
 import Header from './Header';
 
-export default function Home({ games }) {
+export default function Home({ images }) {
   let main = 'Loading...';
-  if (games)
-    main = games.map(({ id, name, file }) => (
+  if (images)
+    main = images.map(({ id, name, file }) => (
       <Link key={id} to={parameterize(name)}>
         <img src={`${server}/image_files/${file}`} alt="" />
         <div className="name">{name}</div>
