@@ -1,11 +1,11 @@
-.game {
-  padding: 4rem 5rem 2rem 1rem;
+.game main {
+  padding: 2.5rem 4.5rem 1rem 1rem;
   display: flex;
   justify-content: center;
   gap: 2rem;
 }
 
-.game h1 {
+.game main h1 {
   margin: 0;
   font-size: 1.5rem;
 }

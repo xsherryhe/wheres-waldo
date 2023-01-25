@@ -1,4 +1,4 @@
-.home {
+.home main {
   padding: 1rem 3rem;
   display: grid;
   grid-template-columns: repeat(3, 30vw);
@@ -6,13 +6,13 @@
   gap: 2rem;
 }
 
-.home > * {
+.home main > * {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
 }
 
-.home img {
+.home main img {
   height: 30vh;
   object-fit: cover;
 }
