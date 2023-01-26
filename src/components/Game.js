@@ -72,32 +72,28 @@ export default function Game({ image }) {
     };
   }, [ids]);
 
-  let main = 'Loading...';
-  if (ids)
-    main = [
-      <Panel key="panel" targets={targets} />,
-      <GameButtons
-        key="game-buttons"
-        feedbackOn={feedbackOn}
-        setFeedbackOn={setFeedbackOn}
-      />,
-      <GameImage
-        key="game-image"
-        file={imageFile}
-        grid={grid}
-        targets={targets}
-        showFeedback={feedbackOn}
-        updateGame={updateGame}
-      />,
-    ];
-
   return (
     <div className="game">
       <GameContext.Provider
         value={{ id: ids?.game, complete, image: ids?.image }}
       >
         <Header />
-        <main>{main}</main>
+        <main>
+          <Panel key="panel" targets={targets} />
+          <GameButtons
+            key="game-buttons"
+            feedbackOn={feedbackOn}
+            setFeedbackOn={setFeedbackOn}
+          />
+          <GameImage
+            key="game-image"
+            file={imageFile}
+            grid={grid}
+            targets={targets}
+            showFeedback={feedbackOn}
+            updateGame={updateGame}
+          />
+        </main>
         {popUp.content}
       </GameContext.Provider>
     </div>

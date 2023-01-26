@@ -26,9 +26,9 @@ export default function GameImage({
 
   function displayCorrect(data, squareId) {
     setActive(null);
+    updateGame(data);
     setNewCorrect(squareId);
     setTimeout(() => setNewCorrect(null), 750);
-    updateGame(data);
   }
 
   function displayIncorrect(squareId) {
@@ -38,8 +38,11 @@ export default function GameImage({
   }
 
   function correct(gameSquareId) {
-    return targets.find(({ squareId }) => squareId === gameSquareId);
+    if (showFeedback || newCorrect === gameSquareId)
+      return targets.find(({ squareId }) => squareId === gameSquareId);
   }
+
+  if (!file) return <div className="game-image"></div>;
 
   return (
     <div className="game-image">
@@ -59,7 +62,6 @@ export default function GameImage({
                 setActive={() => setActive(id)}
                 correct={correct(id)}
                 incorrect={incorrect === id}
-                showFeedback={newCorrect === id || showFeedback}
               />
               {active === id && (
                 <SelectForm

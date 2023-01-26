@@ -5,7 +5,7 @@ import { parameterize } from '../utilities';
 import Header from './Header';
 
 export default function Home({ images }) {
-  let main = 'Loading...';
+  let main = [...new Array(3)].map((_, i) => <div key={i}></div>);
   if (images)
     main = images.map(({ id, name, file }) => (
       <Link key={id} to={parameterize(name)}>

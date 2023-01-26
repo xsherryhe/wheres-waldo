@@ -1,6 +1,11 @@
 .game-image {
   position: relative;
   z-index: 0;
+  height: 525px;
+  width: 750px;
+  box-shadow: 0 0 5px gray;
+  background-color: white;
+  border-radius: 0.2rem;
 }
 
 .game-image .image {
@@ -11,6 +16,7 @@
   width: 750px;
   background-size: cover;
   flex: none;
+  border-radius: 0.2rem;
 }
 
 .game-image .grid {
