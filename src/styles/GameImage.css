@@ -3,9 +3,12 @@
   z-index: 0;
   height: 525px;
   width: 750px;
+  border-radius: 0.2rem;
+}
+
+.game-image.skeleton {
   box-shadow: 0 0 5px gray;
   background-color: white;
-  border-radius: 0.2rem;
 }
 
 .game-image .image {

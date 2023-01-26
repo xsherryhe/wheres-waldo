@@ -12,7 +12,7 @@
 .panel .targets {
   display: grid;
   grid-template-columns: repeat(2, 6rem);
-  grid-auto-rows: 8rem;
+  grid-auto-rows: 8.2rem;
   justify-items: center;
   align-items: stretch;
   gap: 1rem;

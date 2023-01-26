@@ -42,7 +42,7 @@ export default function GameImage({
       return targets.find(({ squareId }) => squareId === gameSquareId);
   }
 
-  if (!file) return <div className="game-image"></div>;
+  if (!file) return <div className="game-image skeleton"></div>;
 
   return (
     <div className="game-image">

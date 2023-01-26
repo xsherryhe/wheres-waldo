@@ -20,7 +20,7 @@
 .square .correct {
   width: 8rem;
   color: green;
-  left: -3rem;
+  left: -2.75rem;
   bottom: 1.5rem;
   display: flex;
   flex-direction: column;
