@@ -20,6 +20,7 @@ header a.home {
 }
 
 header button:not(.square):not(.icon) {
+  min-height: 0;
   color: white;
   padding: 0;
   background-color: transparent;

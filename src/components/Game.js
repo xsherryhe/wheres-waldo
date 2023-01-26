@@ -79,14 +79,9 @@ export default function Game({ image }) {
       >
         <Header />
         <main>
-          <Panel key="panel" targets={targets} />
-          <GameButtons
-            key="game-buttons"
-            feedbackOn={feedbackOn}
-            setFeedbackOn={setFeedbackOn}
-          />
+          <Panel targets={targets} />
+          <GameButtons feedbackOn={feedbackOn} setFeedbackOn={setFeedbackOn} />
           <GameImage
-            key="game-image"
             file={imageFile}
             grid={grid}
             targets={targets}

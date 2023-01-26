@@ -7,3 +7,8 @@ This project is currently in progress.
 Image credits:
 1) Giphy  
   https://giphy.com/gifs/peAFQfg7Ol6IE
+
+2) Icons 8  
+  -Filled fading balls  
+  -Circles-menu-3
+

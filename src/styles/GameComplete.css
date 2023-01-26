@@ -17,3 +17,7 @@
   display: flex;
   gap: 0.5rem;
 }
+
+.game-complete img {
+  height: 50vh;
+}

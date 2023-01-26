@@ -3,6 +3,7 @@ import '../styles/HighScorePlayerForm.css';
 import fetcher from '../fetcher';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import loading from '../images/loading.gif';
 
 import GameContext from './contexts/GameContext';
 
@@ -61,7 +62,7 @@ export default function HighScorePlayerForm({
       <input type="hidden" name="high_score_token" value={token} />
       <button className="icon submit" type="submit" disabled={disabled}>
         {disabled ? (
-          'Loading...'
+          <img className="loading" src={loading} alt="loading" />
         ) : (
           <FontAwesomeIcon icon={faCircleCheck} alt="submit" />
         )}

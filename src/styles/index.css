@@ -25,6 +25,8 @@ button:disabled {
 
 button:not(.icon):not(.square) {
   padding: 0.5rem 1.5rem;
+  min-width: 8rem;
+  min-height: 2.5rem;
 }
 
 button.icon {

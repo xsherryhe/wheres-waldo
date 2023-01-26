@@ -27,6 +27,8 @@
 
 .high-score th, .high-score td {
   padding: 0.5rem 3vw;
+  height: 2rem;
+  min-width: 11vw;
 }
 
 .high-score tr:nth-child(even) {
@@ -39,4 +41,13 @@
 
 .high-score td:not(.rank) {
   text-align: left;
+}
+
+.high-score .loading {
+  display: flex;
+  justify-content: center;
+}
+
+.high-score .loading img {
+  height: 4rem;
 }

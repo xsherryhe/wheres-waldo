@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import '../styles/HighScore.css';
 import fetcher from '../fetcher';
 import { secondsToHMS } from '../utilities';
+import loadingDots from '../images/loading-dots.gif';
 
 import GameContext from './contexts/GameContext';
 import PopUp from './PopUp';
@@ -25,35 +26,51 @@ export default function HighScore({ footer }) {
     getHighScores();
   }, [image]);
 
-  let main = 'Loading...';
+  let body = (
+    <tr>
+      <td colspan="3">
+        <div className="loading">
+          <img src={loadingDots} alt="loading" />
+        </div>
+      </td>
+    </tr>
+  );
+  /* For skeleton table instead of loading GIF:
+  let body = [...new Array(10)].map((_) => (
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  ));
+  */
+
   if (scores)
-    main = (
-      <table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Name</th>
-            <th>Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          {scores.map((score, i) => (
-            <tr key={score.id}>
-              <td className="rank">{i + 1}</td>
-              <td>
-                <HighScorePlayer score={score} />
-              </td>
-              <td>{secondsToHMS(score.time)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
+    body = scores.map((score, i) => (
+      <tr key={score.id}>
+        <td className="rank">{i + 1}</td>
+        <td>
+          <HighScorePlayer score={score} />
+        </td>
+        <td>{secondsToHMS(score.time)}</td>
+      </tr>
+    ));
 
   return (
     <PopUp contentClassName="high-score">
       <h2>High Scores</h2>
-      <main>{main}</main>
+      <main>
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Name</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>{body}</tbody>
+        </table>
+      </main>
       <footer>{footer}</footer>
     </PopUp>
   );

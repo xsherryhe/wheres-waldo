@@ -8,3 +8,8 @@
   font-weight: bold;
   grid-column: 1 / span 2;
 }
+
+.high-score-player-form .loading {
+  width: 1rem;
+  height: 1rem;
+}
