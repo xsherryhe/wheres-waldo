@@ -25,14 +25,18 @@ export default function Carousel({ images }) {
   }
 
   function handlePrevious() {
+    setToLeft(null);
     setToRight(current);
     setFromLeft(getNewCurrent(current, -1));
+    setFromRight(null);
     setCurrent((current) => getNewCurrent(current, -1));
     disableForAnimation();
   }
 
   function handleNext() {
     setToLeft(current);
+    setToRight(null);
+    setFromLeft(null);
     setFromRight(getNewCurrent(current, 1));
     setCurrent((current) => getNewCurrent(current, 1));
     disableForAnimation();
