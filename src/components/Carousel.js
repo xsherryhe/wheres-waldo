@@ -20,30 +20,38 @@ export default function Carousel({ images }) {
     setTimeout(() => setDisabled(false), 250);
   }
 
+  function getNewCurrent(current, direction) {
+    return (current + direction + images.length) % images.length;
+  }
+
   function handlePrevious() {
-    const newCurrent = (current - 1 + images.length) % images.length;
     setToRight(current);
-    setFromLeft(newCurrent);
-    setCurrent(newCurrent);
+    setFromLeft(getNewCurrent(current, -1));
+    setCurrent((current) => getNewCurrent(current, -1));
     disableForAnimation();
   }
 
   function handleNext() {
-    const newCurrent = (current + 1) % images.length;
     setToLeft(current);
-    setFromRight(newCurrent);
-    setCurrent(newCurrent);
+    setFromRight(getNewCurrent(current, 1));
+    setCurrent((current) => getNewCurrent(current, 1));
     disableForAnimation();
   }
 
   if (!images)
     return (
       <div className="carousel">
-        <div className="images"></div>
+        <button className="icon"></button>
+        <div className="display">
+          <div className="name"></div>
+          <div className="images"></div>
+        </div>
+        <button className="icon"></button>
+        <button className="select"></button>
       </div>
     );
 
-  const imageDivs = images.map(({ id, file }, i) => {
+  const imageDisplays = images.map(({ id, file }, i) => {
     let className =
       {
         [toLeft]: 'to-left',
@@ -66,7 +74,7 @@ export default function Carousel({ images }) {
       </button>
       <div className="display">
         <h2 className="name">{images[current].name}</h2>
-        <div className="images">{imageDivs}</div>
+        <div className="images">{imageDisplays}</div>
       </div>
       <button className="icon" onClick={handleNext} disabled={disabled}>
         {'>'}

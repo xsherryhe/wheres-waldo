@@ -42,6 +42,7 @@
   display: grid;
   grid-template: repeat(2, max-content) / repeat(3, max-content);
   align-items: center;
+  justify-items: center;
   box-shadow: 0 0 5px gray;
   padding: 1rem 0.5rem 0.5rem;
   min-height: 55vh;
@@ -53,7 +54,6 @@
   position: relative;
   height: 50vh;
   overflow: hidden;
-  box-shadow: 0 0 5px gray;
   border-bottom-left-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
 }
@@ -92,22 +92,17 @@
   object-fit: cover;
 }
 
-.carousel.sliding-left .images > * {
-  animation: slide-left 0.25s linear;
-}
-
-.carousel.sliding-right .images > * {
-  animation: slide-right 0.25s linear;
-}
-
 .carousel .display {
   margin: 0 1rem 1rem;
   width: 50vw;
+  box-shadow: 0 0 5px gray;
+  border-radius: 0.2rem;
 }
 
 .carousel .name {
   margin: 0;
   padding: 0.5rem;
+  min-height: 2.5rem;
   background-color: darkgreen;
   color: white;
   border-top-left-radius: 0.2rem;
