@@ -1,6 +1,9 @@
+/*
+
 .home main {
   padding: 1rem 3rem;
-  display: grid;
+  *display: grid;
+  display: flex;
   grid-template-columns: repeat(3, 28vw);
   justify-content: center;
   justify-items: stretch;
@@ -21,3 +24,11 @@
   height: 30vh;
   object-fit: cover;
 }
+*/
+
+.home main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

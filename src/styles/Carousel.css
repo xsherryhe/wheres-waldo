@@ -1,0 +1,79 @@
+@keyframes slide-left {
+  from {
+    transform: none;
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-right {
+  from {
+    transform: none;
+  }
+  
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.carousel {
+  display: grid;
+  grid-template: repeat(2, max-content) / repeat(3, max-content);
+  align-items: center;
+  box-shadow: 0 0 5px gray;
+  padding: 1rem 0.5rem 0.5rem;
+  min-height: 55vh;
+  min-width: 55vw;
+  border-radius: 0.2rem;
+}
+
+.carousel .images {
+  position: relative;
+  height: calc(50vh + 2.5rem);
+  width: 50vw;
+  overflow: hidden;
+  box-shadow: 0 0 5px gray;
+  border-radius: 0.2rem;
+  margin: 0 1rem 1rem;
+}
+
+.carousel .images > * {
+  position: absolute;
+  top: 0;
+}
+
+.carousel .images > .left {
+  left: -100%;
+}
+
+.carousel .images > .right {
+  right: -100%;
+}
+
+.carousel .images img {
+  height: 50vh;
+  width: 50vw;
+  object-fit: cover;
+}
+
+.carousel.sliding-left .images > * {
+  animation: slide-left 0.25s linear;
+}
+
+.carousel.sliding-right .images > * {
+  animation: slide-right 0.25s linear;
+}
+
+.carousel .images .name {
+  margin: 0;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  background-color: darkgreen;
+  color: white;
+}
+
+.carousel .select {
+  grid-column: 1 / span 3;
+}
