@@ -1,4 +1,4 @@
-@keyframes slide-left {
+@keyframes to-left {
   from {
     transform: none;
   }
@@ -8,13 +8,33 @@
   }
 }
 
-@keyframes slide-right {
+@keyframes to-right {
   from {
     transform: none;
   }
-  
+
   to {
     transform: translateX(100%);
+  }
+}
+
+@keyframes from-left {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@keyframes from-right {
+  from {
+    transform: translateX(100%);
+  }
+  
+  to {
+    transform: none;
   }
 }
 
@@ -31,25 +51,39 @@
 
 .carousel .images {
   position: relative;
-  height: calc(50vh + 2.5rem);
-  width: 50vw;
+  height: 50vh;
   overflow: hidden;
   box-shadow: 0 0 5px gray;
-  border-radius: 0.2rem;
-  margin: 0 1rem 1rem;
+  border-bottom-left-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
 }
 
 .carousel .images > * {
   position: absolute;
   top: 0;
+  left: 0;
 }
 
-.carousel .images > .left {
-  left: -100%;
+.carousel .images > *:not(.to-left):not(.to-right):not(.current) {
+  display: none;
 }
 
-.carousel .images > .right {
-  right: -100%;
+.carousel .images > .to-left {
+  animation: to-left 0.25s linear;
+  transform: translateX(-100%);
+}
+
+.carousel .images > .to-right {
+  animation: to-right 0.25s linear;
+  transform: translateX(100%);
+}
+
+.carousel .images > .from-left {
+  animation: from-left 0.25s linear;
+}
+
+.carousel .images > .from-right {
+  animation: from-right 0.25s linear;
 }
 
 .carousel .images img {
@@ -66,12 +100,18 @@
   animation: slide-right 0.25s linear;
 }
 
-.carousel .images .name {
+.carousel .display {
+  margin: 0 1rem 1rem;
+  width: 50vw;
+}
+
+.carousel .name {
   margin: 0;
   padding: 0.5rem;
-  font-size: 1.5rem;
   background-color: darkgreen;
   color: white;
+  border-top-left-radius: 0.2rem;
+  border-top-right-radius: 0.2rem;
 }
 
 .carousel .select {

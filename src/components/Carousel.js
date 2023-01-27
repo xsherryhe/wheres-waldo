@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Carousel.css';
 import { parameterize } from '../utilities';
@@ -6,38 +6,35 @@ import { parameterize } from '../utilities';
 import ServerContext from './contexts/ServerContext';
 
 export default function Carousel({ images }) {
-  const [left, setLeft] = useState(null);
-  const [right, setRight] = useState(null);
+  const [toLeft, setToLeft] = useState(null);
+  const [toRight, setToRight] = useState(null);
+  const [fromLeft, setFromLeft] = useState(null);
+  const [fromRight, setFromRight] = useState(null);
   const [current, setCurrent] = useState(0);
-  const [slide, setSlide] = useState(null);
+  const [disabled, setDisabled] = useState(false);
 
   const server = useContext(ServerContext);
-  const imgTags = images?.map(({ file }) => (
-    <img src={`${server}/image_files/${file}`} alt="" />
-  ));
+
+  function disableForAnimation() {
+    setDisabled(true);
+    setTimeout(() => setDisabled(false), 250);
+  }
 
   function handlePrevious() {
-    setLeft((current - 1 + images.length) % images.length);
-    setSlide('right');
+    const newCurrent = (current - 1 + images.length) % images.length;
+    setToRight(current);
+    setFromLeft(newCurrent);
+    setCurrent(newCurrent);
+    disableForAnimation();
   }
 
   function handleNext() {
-    setRight((current + 1) % images.length);
-    setSlide('left');
+    const newCurrent = (current + 1) % images.length;
+    setToLeft(current);
+    setFromRight(newCurrent);
+    setCurrent(newCurrent);
+    disableForAnimation();
   }
-
-  useEffect(() => {
-    const newCurrent = { left: right, right: left }[slide] ?? null;
-    if (newCurrent !== null) {
-      const update = setTimeout(() => {
-        setCurrent(newCurrent);
-        setLeft(null);
-        setRight(null);
-        setSlide(null);
-      }, 250);
-      return () => clearTimeout(update);
-    }
-  }, [slide, left, right]);
 
   if (!images)
     return (
@@ -46,30 +43,32 @@ export default function Carousel({ images }) {
       </div>
     );
 
+  const imageDivs = images.map(({ id, file }, i) => {
+    let className =
+      {
+        [toLeft]: 'to-left',
+        [toRight]: 'to-right',
+        [fromLeft]: 'from-left',
+        [fromRight]: 'from-right',
+      }[i] || '';
+    if (i === current) className += ' current';
+    return (
+      <div key={id} className={className}>
+        <img src={`${server}/image_files/${file}`} alt="" />
+      </div>
+    );
+  });
+
   return (
-    <div className={`carousel ${slide ? `sliding-${slide}` : ''}`}>
-      <button
-        className="icon"
-        onClick={handlePrevious}
-        disabled={Boolean(slide)}
-      >
+    <div className="carousel">
+      <button className="icon" onClick={handlePrevious} disabled={disabled}>
         {'<'}
       </button>
-      <div className="images">
-        <div className="left">
-          <h2 className="name">{images[left]?.name}</h2>
-          {imgTags[left]}
-        </div>
-        <div className="current">
-          <h2 className="name">{images[current].name}</h2>
-          {imgTags[current]}
-        </div>
-        <div className="right">
-          <h2 className="name">{images[right]?.name}</h2>
-          {imgTags[right]}
-        </div>
+      <div className="display">
+        <h2 className="name">{images[current].name}</h2>
+        <div className="images">{imageDivs}</div>
       </div>
-      <button className="icon" onClick={handleNext} disabled={Boolean(slide)}>
+      <button className="icon" onClick={handleNext} disabled={disabled}>
         {'>'}
       </button>
       <Link className="select" to={parameterize(images[current].name)}>
