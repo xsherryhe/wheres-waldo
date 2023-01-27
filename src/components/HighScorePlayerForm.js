@@ -6,6 +6,7 @@ import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import loading from '../images/loading.gif';
 
 import GameContext from './contexts/GameContext';
+import { tryAction } from '../utilities';
 
 export default function HighScorePlayerForm({
   player,
@@ -33,17 +34,26 @@ export default function HighScorePlayerForm({
     });
   }
 
-  async function handleSubmit(e) {
+  function handleError(error) {
+    setPlayerError(error);
+    setDisabled(false);
+  }
+
+  function handleSubmit(e) {
     e.preventDefault();
     if (!validate()) return;
     setDisabled(true);
-    const response = await fetcher(`games/${gameId}`, {
-      method: 'PATCH',
-      body: new FormData(e.target),
-    });
-    const data = await response.json();
-    setPlayer(data.player);
-    close();
+
+    async function submitResponse() {
+      const response = await fetcher(`games/${gameId}`, {
+        method: 'PATCH',
+        body: new FormData(e.target),
+      });
+      const data = await response.json();
+      setPlayer(data.player);
+      close();
+    }
+    tryAction(submitResponse, handleError);
   }
 
   return (
@@ -61,7 +71,7 @@ export default function HighScorePlayerForm({
       {playerError && <div className="error">{playerError}</div>}
       <input type="hidden" name="high_score_token" value={token} />
       <button className="icon submit" type="submit" disabled={disabled}>
-        {disabled ? (
+        {disabled && !playerError ? (
           <img className="loading" src={loading} alt="loading" />
         ) : (
           <FontAwesomeIcon icon={faCircleCheck} alt="submit" />

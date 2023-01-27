@@ -1,0 +1,11 @@
+main.error {
+  margin: 2rem auto;
+  border: 2px solid darkred;
+  border-radius: 0.2rem;
+  font-size: 2rem;
+  width: max-content;
+  padding: 10vh 10vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

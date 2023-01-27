@@ -10,3 +10,16 @@ export function secondsToHMS(totalSeconds) {
 export function parameterize(string) {
   return string.toLowerCase().replace(/ /g, '-');
 }
+
+export async function tryAction(
+  fn,
+  errorMessageFn = (message) => {
+    throw new Error(message);
+  }
+) {
+  try {
+    return await fn();
+  } catch (err) {
+    errorMessageFn(err.message);
+  }
+}

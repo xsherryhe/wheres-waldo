@@ -43,11 +43,11 @@
   text-align: left;
 }
 
-.high-score .loading {
+.high-score .centered {
   display: flex;
   justify-content: center;
 }
 
-.high-score .loading img {
+.high-score .loading {
   height: 4rem;
 }

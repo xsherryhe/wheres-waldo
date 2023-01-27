@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import '../styles/HighScore.css';
 import fetcher from '../fetcher';
-import { secondsToHMS } from '../utilities';
+import { secondsToHMS, tryAction } from '../utilities';
 import loadingDots from '../images/loading-dots.gif';
 
 import GameContext from './contexts/GameContext';
@@ -10,6 +10,7 @@ import HighScorePlayer from './HighScorePlayer';
 
 export default function HighScore({ footer }) {
   const [scores, setScores] = useState(null);
+  const [error, setError] = useState(null);
   const image = useContext(GameContext).image;
 
   useEffect(() => {
@@ -23,18 +24,9 @@ export default function HighScore({ footer }) {
       }));
       setScores(scores);
     }
-    getHighScores();
+    tryAction(getHighScores, setError);
   }, [image]);
 
-  let body = (
-    <tr>
-      <td colspan="3">
-        <div className="loading">
-          <img src={loadingDots} alt="loading" />
-        </div>
-      </td>
-    </tr>
-  );
   /* For skeleton table instead of loading GIF:
   let body = [...new Array(10)].map((_) => (
     <tr>
@@ -45,7 +37,19 @@ export default function HighScore({ footer }) {
   ));
   */
 
-  if (scores)
+  let message = <img className="loading" src={loadingDots} alt="loading" />;
+  if (scores) message = 'No high scores yet!';
+  if (error) message = <span className="error">{error}</span>;
+
+  let body = (
+    <tr>
+      <td colspan="3">
+        <div className="centered">{message}</div>
+      </td>
+    </tr>
+  );
+
+  if (scores?.length)
     body = scores.map((score, i) => (
       <tr key={score.id}>
         <td className="rank">{i + 1}</td>

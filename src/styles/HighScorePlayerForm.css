@@ -1,6 +1,6 @@
 .high-score-player-form {
   display: grid;
-  grid-template: repeat(2, max-content) / repeat(2, max-content);
+  grid-template: repeat(3, max-content) / repeat(2, max-content);
   gap: 0.2rem;
 }
 
@@ -12,4 +12,9 @@
 .high-score-player-form .loading {
   width: 1rem;
   height: 1rem;
+}
+
+.high-score-player-form .error {
+  grid-row: 3;
+  grid-column: 1 / span 2;
 }

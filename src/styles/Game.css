@@ -1,4 +1,4 @@
-.game > main {
+.game > main:not(.error) {
   border-radius: 0.2rem;
   padding: 0.5rem 1rem;
   margin: 1rem auto;
@@ -10,7 +10,7 @@
   width: max-content;
 }
 
-.game > main h1 {
+.game > main:not(.error) h1 {
   margin: 0;
   font-size: 1.5rem;
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext, useRef } from 'react';
 import fetcher from '../fetcher';
 import server from '../server';
-import { secondsToHMS } from '../utilities';
+import { secondsToHMS, tryAction } from '../utilities';
 import '../styles/Game.css';
 
 import Header from './Header';
@@ -9,6 +9,7 @@ import Panel from './Panel';
 import GameButtons from './GameButtons';
 import GameImage from './GameImage';
 import GameComplete from './GameComplete';
+import ErrorMain from './ErrorMain';
 import GameContext from './contexts/GameContext';
 import PopUpContext from './contexts/PopUpContext';
 
@@ -19,6 +20,7 @@ export default function Game({ image }) {
   const [targets, setTargets] = useState(null);
   const [complete, setComplete] = useState(false);
   const [feedbackOn, setFeedbackOn] = useState(true);
+  const [error, setError] = useState(null);
 
   const open = useRef(true);
   const popUp = useContext(PopUpContext);
@@ -61,16 +63,35 @@ export default function Game({ image }) {
       );
       setTargets(data.targets.map(({ target }) => target));
     }
-    startGame();
+    tryAction(startGame, setError);
   }, [image]);
 
   open.current = !complete;
   useEffect(() => {
     return () => {
       if (ids && open.current)
-        fetcher(`games/${ids.game}`, { method: 'DELETE' });
+        tryAction(
+          async () => await fetcher(`games/${ids.game}`, { method: 'DELETE' }),
+          () => {}
+        );
     };
   }, [ids]);
+
+  let main = (
+    <main>
+      <Panel targets={targets} />
+      <GameButtons feedbackOn={feedbackOn} setFeedbackOn={setFeedbackOn} />
+      <GameImage
+        file={imageFile}
+        grid={grid}
+        targets={targets}
+        showFeedback={feedbackOn}
+        updateGame={updateGame}
+      />
+    </main>
+  );
+
+  if (error) main = <ErrorMain error={error} />;
 
   return (
     <div className="game">
@@ -78,17 +99,7 @@ export default function Game({ image }) {
         value={{ id: ids?.game, complete, image: ids?.image }}
       >
         <Header />
-        <main>
-          <Panel targets={targets} />
-          <GameButtons feedbackOn={feedbackOn} setFeedbackOn={setFeedbackOn} />
-          <GameImage
-            file={imageFile}
-            grid={grid}
-            targets={targets}
-            showFeedback={feedbackOn}
-            updateGame={updateGame}
-          />
-        </main>
+        {main}
         {popUp.content}
       </GameContext.Provider>
     </div>

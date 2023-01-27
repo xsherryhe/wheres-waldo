@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import fetcher from '../fetcher';
 import '../styles/SelectForm.css';
+import { tryAction } from '../utilities';
 
 import GameContext from './contexts/GameContext';
 
@@ -12,18 +13,27 @@ export default function SelectForm({
   offset,
 }) {
   const [disabled, setDisabled] = useState(false);
+  const [error, setError] = useState(null);
   const gameId = useContext(GameContext).id;
 
-  async function handleChange(e) {
+  function handleError(error) {
+    setError(error);
+    setDisabled(false);
+  }
+
+  function handleChange(e) {
     setDisabled(true);
-    const targetId = Number(e.target.value);
-    const response = await fetcher(
-      `games/${gameId}?selection=${squareId}&target=${targetId}`,
-      { method: 'PATCH' }
-    );
-    const data = await response.json();
-    if (data) displayCorrect(data, squareId);
-    else displayIncorrect(squareId);
+    async function submitResponse() {
+      const targetId = Number(e.target.value);
+      const response = await fetcher(
+        `games/${gameId}?selection=${squareId}&target=${targetId}`,
+        { method: 'PATCH' }
+      );
+      const data = await response.json();
+      if (data) displayCorrect(data, squareId);
+      else displayIncorrect(squareId);
+    }
+    tryAction(submitResponse, handleError);
   }
 
   return (
@@ -41,6 +51,7 @@ export default function SelectForm({
           </option>
         ))}
       </select>
+      {error && <div className="error">{error}</div>}
     </form>
   );
 }
