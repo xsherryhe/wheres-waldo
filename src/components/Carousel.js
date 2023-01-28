@@ -1,7 +1,13 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Carousel.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 import { parameterize } from '../utilities';
+import loadingDots from '../images/loading-dots.gif';
 
 import ServerContext from './contexts/ServerContext';
 
@@ -45,13 +51,21 @@ export default function Carousel({ images }) {
   if (!images)
     return (
       <div className="carousel">
-        <button className="icon"></button>
+        <button className="icon arrow">
+          <FontAwesomeIcon icon={faChevronLeft} />
+        </button>
         <div className="display">
           <div className="name"></div>
-          <div className="images"></div>
+          <div className="images">
+            <div className="loading">
+              <img src={loadingDots} alt="loading" />
+            </div>
+          </div>
         </div>
-        <button className="icon"></button>
-        <button className="select"></button>
+        <button className="icon arrow">
+          <FontAwesomeIcon icon={faChevronRight} />
+        </button>
+        <button className="select">Play Game</button>
       </div>
     );
 
@@ -73,18 +87,22 @@ export default function Carousel({ images }) {
 
   return (
     <div className="carousel">
-      <button className="icon" onClick={handlePrevious} disabled={disabled}>
-        {'<'}
+      <button
+        className="icon arrow"
+        onClick={handlePrevious}
+        disabled={disabled}
+      >
+        <FontAwesomeIcon icon={faChevronLeft} />
       </button>
       <div className="display">
         <h2 className="name">{images[current].name}</h2>
         <div className="images">{imageDisplays}</div>
       </div>
-      <button className="icon" onClick={handleNext} disabled={disabled}>
-        {'>'}
+      <button className="icon arrow" onClick={handleNext} disabled={disabled}>
+        <FontAwesomeIcon icon={faChevronRight} />
       </button>
       <Link className="select" to={parameterize(images[current].name)}>
-        Play Game
+        <button>Play Game</button>
       </Link>
     </div>
   );
