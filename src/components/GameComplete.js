@@ -11,9 +11,6 @@ export default function GameComplete() {
   const popUp = useContext(PopUpContext);
   const complete = useContext(GameContext).complete;
 
-  const closeButton = (
-    <button onClick={popUp.close}>Admire Completed Map</button>
-  );
   return (
     <PopUp contentClassName="game-complete">
       <h1>You win!</h1>
@@ -27,12 +24,9 @@ export default function GameComplete() {
         )}
       </div>
       {complete.highScore ? (
-        <HighScoreButton
-          text="Add Your Name to High Scores"
-          footer={closeButton}
-        />
+        <HighScoreButton text="Add Your Name to High Scores" />
       ) : (
-        { closeButton }
+        <button onClick={popUp.close}>Admire Completed Map</button>
       )}
     </PopUp>
   );

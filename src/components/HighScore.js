@@ -8,7 +8,7 @@ import GameContext from './contexts/GameContext';
 import PopUp from './PopUp';
 import HighScorePlayer from './HighScorePlayer';
 
-export default function HighScore({ footer }) {
+export default function HighScore() {
   const [scores, setScores] = useState(null);
   const [error, setError] = useState(null);
   const image = useContext(GameContext).image;
@@ -75,7 +75,6 @@ export default function HighScore({ footer }) {
           <tbody>{body}</tbody>
         </table>
       </main>
-      <footer>{footer}</footer>
     </PopUp>
   );
 }
