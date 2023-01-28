@@ -3,3 +3,7 @@
   gap: 0.2rem;
   align-items: center;
 }
+
+.high-score-player button.edit {
+  box-shadow: none;
+}

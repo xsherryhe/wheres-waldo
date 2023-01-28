@@ -110,6 +110,7 @@
 }
 
 .carousel .name {
+  font-weight: 600;
   margin: 0;
   padding: 0.5rem;
   min-height: 2.5rem;
@@ -120,15 +121,7 @@
 }
 
 .carousel button {
-  background-color: darkgreen;
-  color: white;
-  border: none;
-  border-radius: 0.2rem;
   box-shadow: 0 0 5px gray;
-}
-
-.carousel button:hover {
-  background-color: green;
 }
 
 .carousel .arrow {
@@ -142,5 +135,7 @@
 }
 
 .carousel .select button {
+  font-weight: 600;
+  font-size: 1.2rem;
   padding: 0.5rem 4rem;
 }

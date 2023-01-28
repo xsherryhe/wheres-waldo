@@ -3,12 +3,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 2px solid darkgreen;
+  border-radius: 0.2rem;
 }
 
 .target img {
   height: 5.75rem;
   width: 5.75rem;
   object-fit: cover;
+}
+
+.target .name {
+  flex: 1 1 0;
+  padding: 0.2rem;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
 }
 
 .target .check {

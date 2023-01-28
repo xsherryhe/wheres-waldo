@@ -23,6 +23,18 @@ button:disabled {
   cursor: default;
 }
 
+button:not(.square) {
+  background-color: darkgreen;
+  color: white;
+  border-radius: 0.2rem;
+  border: none;
+  box-shadow: 0 0 5px gray;
+}
+
+button:not(.square):not(:disabled):hover {
+  background-color: green;
+}
+
 button:not(.icon):not(.square) {
   padding: 0.5rem 1.5rem;
   min-width: 8rem;
@@ -39,6 +51,14 @@ button.icon {
 
 p {
   margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 code {

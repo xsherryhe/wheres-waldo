@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.game-complete h1 {
+  margin: 0;
+}
+
 .game-complete .message {
   margin: 0.25rem;
   display: flex;
@@ -20,4 +24,8 @@
 
 .game-complete img {
   height: 50vh;
+}
+
+.game-complete button {
+  font-weight: 600;
 }

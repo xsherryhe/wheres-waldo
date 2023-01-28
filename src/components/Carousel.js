@@ -69,7 +69,7 @@ export default function Carousel({ images }) {
       </div>
     );
 
-  const imageDisplays = images.map(({ id, file }, i) => {
+  const imageDisplays = images.map(({ id, name, file }, i) => {
     let className =
       {
         [toLeft]: 'to-left',
@@ -79,9 +79,9 @@ export default function Carousel({ images }) {
       }[i] || '';
     if (i === current) className += ' current';
     return (
-      <div key={id} className={className}>
+      <Link key={id} to={parameterize(name)} className={className}>
         <img src={`${server}/image_files/${file}`} alt="" />
-      </div>
+      </Link>
     );
   });
 

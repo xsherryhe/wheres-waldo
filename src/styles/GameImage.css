@@ -4,10 +4,10 @@
   height: 525px;
   width: 750px;
   border-radius: 0.2rem;
+  box-shadow: 0 0 5px gray;
 }
 
 .game-image.skeleton {
-  box-shadow: 0 0 5px gray;
   background-color: white;
 }
 

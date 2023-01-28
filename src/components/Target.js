@@ -8,7 +8,7 @@ export default function Target({ name, file, found }) {
     <div className="target">
       <img src={`${server}/image_files/${file}`} alt="" />
       {found && <FontAwesomeIcon className="check" icon={faCircleCheck} />}
-      <div>{name}</div>
+      <div className="name">{name}</div>
     </div>
   );
 }

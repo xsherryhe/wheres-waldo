@@ -26,6 +26,10 @@
 }
 */
 
+.home > h1 {
+  font-weight: 600;
+}
+
 .home main {
   display: flex;
   align-items: center;
