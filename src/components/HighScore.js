@@ -43,7 +43,7 @@ export default function HighScore() {
 
   let body = (
     <tr>
-      <td colspan="3">
+      <td colSpan="3">
         <div className="centered">{message}</div>
       </td>
     </tr>
