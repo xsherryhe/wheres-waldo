@@ -1,7 +1,11 @@
+.game {
+  padding-bottom: 1rem;
+}
+
 .game > main:not(.error) {
   border-radius: 0.2rem;
   padding: 0.5rem 1rem;
-  margin: 1rem auto;
+  margin: 1rem auto 0;
   display: grid;
   grid-template: 4.5rem calc(525px + 0.5rem) 1.5rem / repeat(2, max-content);
   justify-content: center;
