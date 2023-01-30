@@ -51,7 +51,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <PopUpContext.Provider
           value={{ content: popUp, set: setPopUp, close: closePopUp }}
         >
