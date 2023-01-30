@@ -1,3 +1,4 @@
 import { createContext } from 'react';
-const ServerContext = createContext('http://localhost:3000');
+import server from '../../server';
+const ServerContext = createContext(server);
 export default ServerContext;

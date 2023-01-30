@@ -1,2 +1,2 @@
-const server = 'http://localhost:3000';
+const server = 'https://young-island-29156.herokuapp.com';
 export default server;
