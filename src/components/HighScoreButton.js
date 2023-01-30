@@ -13,7 +13,7 @@ export default function HighScoreButton({
   }
 
   return (
-    <button className={className} onClick={handleClick}>
+    <button className={`see-high-score ${className}`} onClick={handleClick}>
       {text}
     </button>
   );

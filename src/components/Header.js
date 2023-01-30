@@ -9,6 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import GameContext from './contexts/GameContext';
+import GameResetButton from './GameResetButton';
 import HighScoreButton from './HighScoreButton';
 
 export default function Header() {
@@ -30,6 +31,7 @@ export default function Header() {
           text={<FontAwesomeIcon icon={faTableList} alt="high scores" />}
         />
       )}
+      {game?.image && <GameResetButton />}
     </header>
   );
 }

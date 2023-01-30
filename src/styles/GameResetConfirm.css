@@ -1,0 +1,16 @@
+.game-reset-confirm {
+  margin-top: 5vh;
+}
+
+.game-reset-confirm h1 {
+  font-weight: 600;
+}
+
+.game-reset-confirm .buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.game-reset-confirm .buttons button {
+  font-weight: 600;
+}
