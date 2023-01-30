@@ -3,7 +3,7 @@
   padding: 0.5rem 1rem;
   margin: 1rem auto;
   display: grid;
-  grid-template: 4.5rem calc(525px + 2rem) / repeat(2, max-content);
+  grid-template: 4.5rem calc(525px + 0.5rem) 1.5rem / repeat(2, max-content);
   justify-content: center;
   column-gap: 1rem;
   box-shadow: 0 0 5px gray;

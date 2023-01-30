@@ -12,6 +12,7 @@ import GameComplete from './GameComplete';
 import ErrorMain from './ErrorMain';
 import GameContext from './contexts/GameContext';
 import PopUpContext from './contexts/PopUpContext';
+import GameCompleteLabel from './GameCompleteLabel';
 
 export default function Game({ image }) {
   const [ids, setIds] = useState(null);
@@ -88,6 +89,7 @@ export default function Game({ image }) {
         showFeedback={feedbackOn}
         updateGame={updateGame}
       />
+      <GameCompleteLabel />
     </main>
   );
 

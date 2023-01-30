@@ -2,7 +2,7 @@
   background-color: white;
   padding: 0.5rem 0.75rem;
   border-radius: 0.2rem;
-  grid-row: 1 / span 2;
+  grid-row: 1 / span 3;
   box-shadow: 0 0 5px gray;
   display: flex;
   flex-direction: column;

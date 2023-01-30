@@ -1,0 +1,9 @@
+.game-complete-label {
+  color: darkgreen;
+  justify-self: end;
+  align-self: center;
+}
+
+.game-complete-label .time {
+  font-weight: 600;
+}
