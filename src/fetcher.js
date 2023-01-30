@@ -32,7 +32,13 @@ export default async function fetcher(
     throw new Error('Sorry, something went wrong.');
   }
 
-  if (response.status !== 200) throw new Error('Sorry, something went wrong.');
+  if (response.status !== 200) {
+    const message =
+      {
+        422: 'Please make sure cookies are enabled.',
+      }[response.status] || '';
+    throw new Error(['Sorry, something went wrong.', message].join(' '));
+  }
 
   headerData.csrf = response.headers.get('CSRF-TOKEN') || headerData.csrf;
   return response;
