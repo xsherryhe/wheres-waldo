@@ -1,5 +1,9 @@
 import server from './server';
 
+const errorMessage = 'Sorry, something went wrong.';
+const statusErrorMessages = {
+  422: 'Please make sure cookies are enabled.',
+};
 const headerData = { csrf: null };
 
 function duration(milliseconds, promise) {
@@ -29,15 +33,12 @@ export default async function fetcher(
       })
     );
   } catch (err) {
-    throw new Error('Sorry, something went wrong.');
+    throw new Error(errorMessage);
   }
 
   if (response.status !== 200) {
-    const message =
-      {
-        422: 'Please make sure cookies are enabled.',
-      }[response.status] || '';
-    throw new Error(['Sorry, something went wrong.', message].join(' '));
+    const statusErrorMessage = statusErrorMessages[response.status] || '';
+    throw new Error([errorMessage, statusErrorMessage].join(' '));
   }
 
   headerData.csrf = response.headers.get('CSRF-TOKEN') || headerData.csrf;
