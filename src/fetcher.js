@@ -19,19 +19,22 @@ function duration(milliseconds, promise) {
 
 export default async function fetcher(
   path = '',
-  { headers = {}, ...options } = {}
+  { headers = {}, timeoutError = true, ...options } = {}
 ) {
+  const fetchArgs = [
+    `${server}/${path}`,
+    {
+      mode: 'cors',
+      credentials: 'include',
+      headers: { 'X-CSRF-Token': headerData.csrf, ...headers },
+      ...options,
+    },
+  ];
+
   let response;
   try {
-    response = await duration(
-      5000,
-      fetch(`${server}/${path}`, {
-        mode: 'cors',
-        credentials: 'include',
-        headers: { 'X-CSRF-Token': headerData.csrf, ...headers },
-        ...options,
-      })
-    );
+    if (timeoutError) response = await duration(5000, fetch(...fetchArgs));
+    else response = await fetch(...fetchArgs);
   } catch (err) {
     throw new Error(errorMessage);
   }

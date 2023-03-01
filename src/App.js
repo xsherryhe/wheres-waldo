@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     async function getImages() {
-      const response = await fetcher('images');
+      const response = await fetcher('images', { timeoutError: false });
       const data = await response.json();
       setImages(data);
     }
